@@ -1,0 +1,43 @@
+.custom-card {
+  max-width: 1600px;
+  margin: 0 auto;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+}
+
+.btn {
+  width: 8%;
+}
+
+.card-text-container {
+  margin-right: -15px;
+}
+
+.card-img-container {
+  text-align: center;
+}
+/*.card-body {*/
+/*  display: flex;*/
+/*  justify-content: space-between;*/
+/*  align-items: center;*/
+/*  padding: 20px;*/
+/*}*/
+
+/*.card-text-container {*/
+/*  flex-grow: 3 !important;*/
+/*  padding: 10px;*/
+/*  border: 1px solid black;*/
+/*  background-color: lightgray;*/
+/*  margin-right: 20px;*/
+/*}*/
+
+/*.card-img-container {*/
+/*  flex-grow: 1 !important;*/
+/*  padding: 10px;*/
+/*  border: 1px solid black;*/
+/*  background-color: lightgray;*/
+/*}*/
+
+
+

@@ -1,0 +1,16 @@
+<div class="card mt-3 custom-card bg-secondary">
+  <button class="btn btn-primary m-3">Создать</button>
+  <div class="card-body m-3" style="background-color: lightgray">
+    <h5 class="card-title fs-6 ms-3">Время создания: {{ note?.createdAt | date: 'short' }} </h5>
+    <div class="row gap-0 d-flex justify-content-between align-items-center">
+      <div class="col-10 card-text-container border p-3 me-2" style="height: 120px; margin-left: 15px; background-color: #dee2e6">
+        <p class="card-text">{{ note?.text }}</p>
+      </div>
+      <div class="col-auto card-img-container border p-3 ms-1" style="height: 160px; margin-right: 15px; margin-bottom: 37px; background-color: #dee2e6">
+        <figure class="figure">
+          <img class="figure-img img-fluid rounded" [src]="note?.imageUrl" alt="Изображение к записи">
+        </figure>
+      </div>
+    </div>
+  </div>
+</div>
