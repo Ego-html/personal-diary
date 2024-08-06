@@ -1,22 +1,23 @@
 import {Component, OnInit} from '@angular/core';
 import {DatePipe} from "@angular/common";
+import { Note } from '../models/note.model';
 
 @Component({
-  selector: 'app-note',
+  selector: 'app-main',
   standalone: true,
   imports: [
     DatePipe
   ],
-  templateUrl: './note.component.html',
-  styleUrl: './note.component.css'
+  templateUrl: './main.component.html',
+  styleUrl: './main.component.css'
 })
-export class NoteComponent implements OnInit {
-  note: { createdAt: Date; text: string; imageUrl?: string; } | undefined;
+export class MainComponent implements OnInit {
+  note: Note | undefined;
 
   ngOnInit() {
     this.note = {
       createdAt: new Date(),
-      text: 'This is a new note',
+      text: 'This is a new main',
       imageUrl: '#'
     };
   }
