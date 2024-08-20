@@ -1,0 +1,23 @@
+<div class="card mt-3 custom-card bg-secondary">
+  <div class="d-flex justify-content-start">
+    <button class="btn btn-danger btn-sm m-3" (click)="handleDelete(note.id)">Очистить</button>
+    <button class="btn btn-primary btn-sm m-3" [routerLink]="['/edit',note.id]">Редактировать</button>
+  </div>
+
+    <div class="card-body bg-light">
+      <h5 class="card-title fs-6 ms-3">Время создания: {{ note?.createdAt | date: 'short' }} </h5>
+      <div class="d-flex justify-content-between">
+        <!-- Блок с текстом -->
+        <div class="d-flex flex-column flex-grow-1 card-text-container border p-3 me-2">
+          <p class="card-text mt-auto">{{ note?.text }}</p>
+        </div>
+        <!-- Блок с картинкой -->
+        <div class="col-auto card-img-container ms-1">
+          <img class="figure-img img-fluid rounded note-image"
+               [src]="note?.image"
+               alt="Изображение к записи">
+        </div>
+      </div>
+    </div>
+  </div>
+

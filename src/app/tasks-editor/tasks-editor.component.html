@@ -1,0 +1,12 @@
+<div class="container mt-5">
+  <h2>{{ editId ? 'Редактировать задание' : 'Создать задание' }}</h2>
+  <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+    <label for="text" class="form-label">Текст задания</label>
+    <input type="text" id="text" class="form-control" formControlName="text">
+    <div class="mb-3">
+      <label for="imageFile" class="form-label">Загрузить изображения</label>
+      <input type="file" id="imageFile" class="form-control" (change)="onFileSelected($event)">
+    </div>
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+  </form>
+</div>
