@@ -26,7 +26,7 @@ export class ToDoService {
     if (index > -1) {
       todos[index] = todo;
     } else {
-      todos.push(todo);
+      todos.unshift(todo);
     }
     this.todoSignal.set([...todos]);
   }
