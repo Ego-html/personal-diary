@@ -1,4 +1,4 @@
-import {Injectable, signal} from '@angular/core';
+import {effect, Injectable, signal} from '@angular/core';
 import {Note} from "../models/note.model";
 
 @Injectable({
@@ -6,8 +6,12 @@ import {Note} from "../models/note.model";
 })
 export class ToDoService {
   todoSignal = signal<Note[]>(this.initTodoSignal())
+  todos = this.todoSignal.asReadonly();
 
   constructor() {
+    effect(() => {
+      localStorage.setItem('todos', JSON.stringify(this.todoSignal()));
+    });
   }
 
   private initTodoSignal(): Note[] {
@@ -31,7 +35,7 @@ export class ToDoService {
   deleteTodoById(todoId: string) {
     const todos = this.todoSignal().filter(todo => todo.id !== todoId);
     this.updateStorage(todos);
-    this.todoSignal.set(todos);
+    this.todoSignal.set([...todos]);
   }
 
   private updateStorage(todos: Note[]) {

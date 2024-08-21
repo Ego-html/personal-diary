@@ -2,7 +2,7 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {Note} from "../models/note.model";
 import {DatePipe, NgForOf} from "@angular/common";
 import {RouterLink} from "@angular/router";
-import {ToDoService} from "../service/to-do-service.service";
+import {ToDoService} from "../services/to-do-service.service";
 
 @Component({
   selector: 'app-tasks-editor-list',

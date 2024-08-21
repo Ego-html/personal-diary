@@ -1,2 +1,3 @@
-<button class="btn btn-primary m-3" [routerLink]="['/edit']">Создать</button>
-<app-tasks-editor-list *ngFor="let note of notes" [note]="note" (delete)="handleDelete(note)"></app-tasks-editor-list>
+<button class="btn btn-primary m-3" [routerLink]="['/create']">Создать</button>
+<button class="btn btn-danger m-3" (click)="onLogout()">Выйти</button>
+<app-tasks-editor-list *ngFor="let note of notes()" [note]="note" (delete)="handleDelete(note)"></app-tasks-editor-list>

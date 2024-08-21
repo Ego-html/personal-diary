@@ -1,10 +1,12 @@
-import {Component, effect, OnInit} from '@angular/core';
-import {DatePipe, NgForOf} from "@angular/common";
-import {Note} from '../models/note.model';
-import {RouterLink} from "@angular/router";
-import {ToDoService} from "../service/to-do-service.service";
-import {NoteListComponent} from "../note/note-list.component";
-import {TasksEditorComponent} from "../tasks-editor/tasks-editor.component";
+// src/app/main/main.component.ts
+import {Component, effect, OnInit, Signal, signal} from '@angular/core';
+import { DatePipe, NgForOf } from "@angular/common";
+import { Note } from '../models/note.model';
+import { RouterLink, Router } from "@angular/router";
+import { ToDoService } from "../services/to-do-service.service";
+import { NoteListComponent } from "../note/note-list.component";
+import { TasksEditorComponent } from "../tasks-editor/tasks-editor.component";
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-main',
@@ -17,18 +19,29 @@ import {TasksEditorComponent} from "../tasks-editor/tasks-editor.component";
     TasksEditorComponent
   ],
   templateUrl: './main.component.html',
-  styleUrl: './main.component.css'
+  styleUrls: ['./main.component.css']
 })
-export class MainComponent {
-  notes: Note[] = [];
+export class MainComponent implements OnInit{
+  notes!: Signal<Note[]>;
 
-  constructor(private todoService: ToDoService) {
-    effect(() => {
-      this.notes = this.todoService.todoSignal();
-    })
+  constructor(
+    private todoService: ToDoService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.notes = this.todoService.todos;
   }
 
   handleDelete(noteToDelete: Note): void {
-    this.todoService.deleteTodoById(noteToDelete.id)
+    this.todoService.deleteTodoById(noteToDelete.id);
   }
+
+  onLogout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
+
+
 }

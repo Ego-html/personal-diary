@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
-import {ToDoService} from "../service/to-do-service.service";
+import {ToDoService} from "../services/to-do-service.service";
 import {Note} from "../models/note.model";
 
 
@@ -21,7 +21,6 @@ class ToDo {
 export class TasksEditorComponent implements OnInit {
   todoForm!: FormGroup;
   editId!: string | null;
-  isEditMode = false;
 
   constructor(
     private fb: FormBuilder,
@@ -40,6 +39,8 @@ export class TasksEditorComponent implements OnInit {
     this.todoForm = this.fb.group({
       id: [todo ? todo.id : this.generateNewId()],
       text: [todo ? todo.text : '', Validators.required],
+      description: [todo ? todo.description : ''],
+      completed: [todo ? todo.completed : false], // Инициализация completed
       image: [todo ? todo.image : ''],
       createdAt: [todo ? todo.createdAt : new Date()],
     });
@@ -54,20 +55,21 @@ export class TasksEditorComponent implements OnInit {
 
   onSubmit(): void {
     if (this.todoForm.valid) {
-      const todoData: Note = this.todoForm.value;
-
-      const todos = this.todoService.todoSignal();
-
-      const existingTodoIndex = todos.findIndex(t => t.id == todoData.id)
-
-      if (existingTodoIndex > -1) {
-        todos[existingTodoIndex] = todoData;
-      } else {
-        todoData.id = String(this.generateNewId());
-        todos.push(todoData);
-      }
-
-      this.todoService.todoSignal.set(todos);
+      this.todoService.saveToDo(this.todoForm.value)
+      // const todoData: Note = this.todoForm.value;
+      //
+      // const todos = this.todoService.todoSignal();
+      //
+      // const existingTodoIndex = todos.findIndex(t => t.id == todoData.id)
+      //
+      // if (existingTodoIndex > -1) {
+      //   todos[existingTodoIndex] = todoData;
+      // } else {
+      //   todoData.id = String(this.generateNewId());
+      //   todos.push(todoData);
+      // }
+      //
+      // this.todoService.todoSignal.set(todos);
       this.todoForm.reset()
       this.router.navigate(['/']);
     }
